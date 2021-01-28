@@ -20,7 +20,9 @@ jobs:
       options:
         -it
         --rm
+        --name bililivetools
     steps:
       - name: Run task
         run: |
-          echo "Run task"
+          echo "Start Container"
+          docker start bililivetools -i

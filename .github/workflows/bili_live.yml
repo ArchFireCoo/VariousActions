@@ -24,7 +24,7 @@ jobs:
       - name: Run task
         run: |
           echo "Start Container"
-          git pull
+          ls -lha
           pip3 install --no-cache-dir -r requirements.txt
           sed -i ''"$(cat conf/bilibili.conf -n | grep "username =" | awk '{print $1}')"'c '"$(echo "username = ${USER_NAME}")"'' conf/bilibili.conf
           sed -i ''"$(cat conf/bilibili.conf -n | grep "password =" | awk '{print $1}')"'c '"$(echo "password = ${USER_PASSWORD}")"'' conf/bilibili.conf

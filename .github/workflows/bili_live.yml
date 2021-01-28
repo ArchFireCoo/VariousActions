@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     name: bilibili_live
+    env:
+      TZ: Asia/Shanghai
     steps:
       - name: Checkout
         uses: actions/checkout@v2

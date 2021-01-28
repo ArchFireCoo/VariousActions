@@ -18,11 +18,10 @@ jobs:
         USER_NAME: ${{ secrets.BILIBILI_LIVE_USERNAME }}
         USER_PASSWORD: ${{ secrets.BILIBILI_LIVE_PASSWORD }}
       options:
-        --name bililivetools
         -it
         --rm
     steps:
       - name: Run task
         run: |
           echo "Start Container"
-          docker start bililivetools -i
+          /usr/bin/docker start dawnspace/bilibili-live-tools:latest -i

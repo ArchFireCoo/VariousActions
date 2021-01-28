@@ -4,9 +4,6 @@ name: bilibili_live
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
   schedule:
     - cron: 0 16 * * *
 
@@ -18,8 +15,8 @@ jobs:
     container:
       image: dawnspace/bilibili-live-tools
       env:
-        USER_NAME: ${{ BILIBILI_LIVE_USERNAME }}
-        PASS_WORD: ${{ BILIBILI_LIVE_PASSWORD }}
+        USER_NAME: ${{ secrets.BILIBILI_LIVE_USERNAME }}
+        PASS_WORD: ${{ secrets.BILIBILI_LIVE_PASSWORD }}
       options:
         -itd
         --rm

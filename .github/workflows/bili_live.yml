@@ -14,10 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Container
-        uses: docker://dawnspace/bilibili-live-tools:latest
+        uses: docker://dawnspace/bilibili-live-tools
         with:
           args:
             -it
             --rm
             -e USER_NAME=${{ secrets.BILIBILI_LIVE_USERNAME }}
             -e USER_PASSWORD=${{ secrets.BILIBILI_LIVE_PASSWORD }}
+      - name: 'PS'
+        run: |
+          /usr/bin/docker ps

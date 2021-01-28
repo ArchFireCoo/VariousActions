@@ -1,0 +1,33 @@
+name: baidu_tieba
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: 15 8,20 * * *
+jobs:
+  run-it:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    name: baidu_tieba
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: bebestmaple/Tieba_Github-Actions
+          ref: master
+      - name: PHP
+        uses: peng4740/gh-action-php@5.6
+      - name: '运行【百度贴吧签到】'
+        run: |
+          if [ '${{ secrets.BDUSS }}' != '' ]; then sed -i "s/xxxxx/${{ secrets.BDUSS }}/" tieba.php; fi
+          random_time=$(($RANDOM % 300))
+          echo "等待 ${random_time} 分钟后开始签到"
+          for((i=1;i<=${random_time};i++));  
+          do
+          echo "倒计时 $[${random_time}-$i] 分钟"
+          sleep 1m
+          done
+          php tieba.php

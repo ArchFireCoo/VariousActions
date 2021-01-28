@@ -16,7 +16,7 @@ jobs:
       image: dawnspace/bilibili-live-tools
       env:
         USER_NAME: ${{ secrets.BILIBILI_LIVE_USERNAME }}
-        PASS_WORD: ${{ secrets.BILIBILI_LIVE_PASSWORD }}
+        USER_PASSWORD: ${{ secrets.BILIBILI_LIVE_PASSWORD }}
       options:
         -it
         --rm

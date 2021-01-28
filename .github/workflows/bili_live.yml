@@ -12,20 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     name: bilibili_live
-    container:
-      image: dawnspace/bilibili-live-tools
-      env:
-        USER_NAME: ${{ secrets.BILIBILI_LIVE_USERNAME }}
-        USER_PASSWORD: ${{ secrets.BILIBILI_LIVE_PASSWORD }}
-      options:
-        -it
-        --rm
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: Dawnnnnnn/bilibili-live-tools
+          ref: master
+      - name: Use python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
       - name: Run task
         run: |
-          echo "Start Container"
           ls -lha
           pip3 install --no-cache-dir -r requirements.txt
-          sed -i ''"$(cat conf/bilibili.conf -n | grep "username =" | awk '{print $1}')"'c '"$(echo "username = ${USER_NAME}")"'' conf/bilibili.conf
-          sed -i ''"$(cat conf/bilibili.conf -n | grep "password =" | awk '{print $1}')"'c '"$(echo "password = ${USER_PASSWORD}")"'' conf/bilibili.conf
+          sed -i ''"$(cat conf/bilibili.conf -n | grep "username =" | awk '{print $1}')"'c '"$(echo "username = ${{ secrets.BILIBILI_LIVE_USERNAME }}")"'' conf/bilibili.conf
+          sed -i ''"$(cat conf/bilibili.conf -n | grep "password =" | awk '{print $1}')"'c '"$(echo "password = ${{ secrets.BILIBILI_LIVE_PASSWORD}}")"'' conf/bilibili.conf
           python ./run.py

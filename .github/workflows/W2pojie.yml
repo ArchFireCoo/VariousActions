@@ -1,0 +1,33 @@
+name: W2pojie
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2,3 * * *'
+
+jobs:
+  W2pojie:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run script
+        run: node ./scripts/w2pojie.js
+        env:
+          COOKIE: ${{ secrets.W2PJ_COOKIE }}
+          SCKEY: ${{ secrets.SCKEY }}

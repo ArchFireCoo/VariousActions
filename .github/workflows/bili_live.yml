@@ -11,7 +11,6 @@ jobs:
   bilibili_live:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    name: bilibili-live
     steps:
       - uses: actions/checkout@v2
       - name: Run Container
@@ -20,5 +19,5 @@ jobs:
           args:
             -it
             --rm
-            USER_NAME: ${{ secrets.BILIBILI_LIVE_USERNAME}}
-            USER_PASSWORD: ${{ secrets.BILIBILI_LIVE_PASSWORD }}
+            -e USER_NAME=${{ secrets.BILIBILI_LIVE_USERNAME }}
+            -e USER_PASSWORD=${{ secrets.BILIBILI_LIVE_PASSWORD }}

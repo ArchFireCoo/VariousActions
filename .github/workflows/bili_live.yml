@@ -10,7 +10,7 @@ on:
 jobs:
   # bilibili_live:
   #   runs-on: ubuntu-latest
-  #   if: github.event.repository.owner.id == github.event.sender.id
+  #   if: github.even. .repository.owner.id == github.event.sender.id
   #   name: bilibili_live
   #   container:
   #     image: dawnspace/bilibili-live-tools
@@ -27,6 +27,8 @@ jobs:
   #         /usr/bin/docker start dawnspace/bilibili-live-tools:latest -i
   bilibili_live:
     runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    name: bilibili-live
     steps:
       - uses: actions/checkout@v2
       - name: Run Container

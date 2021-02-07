@@ -1,15 +1,16 @@
 #docker run -itd --rm -e USER_NAME=你的B站账号 -e USER_PASSWORD=你的B站密码 dawnspace/bilibili-live-tools
 
+
 name: bilibili_live
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: 0 16 * * *
+    - cron: 0 4,16 * * *
 
 jobs:
   bilibili_live:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
     name: bilibili_live
     env:
@@ -27,8 +28,12 @@ jobs:
           architecture: 'x64'
       - name: Run task
         run: |
-          ls -lha
           pip3 install --no-cache-dir -r requirements.txt
-          sed -i ''"$(cat conf/bilibili.conf -n | grep "username =" | awk '{print $1}')"'c '"$(echo "username = ${{ secrets.BILIBILI_LIVE_USERNAME }}")"'' conf/bilibili.conf
-          sed -i ''"$(cat conf/bilibili.conf -n | grep "password =" | awk '{print $1}')"'c '"$(echo "password = ${{ secrets.BILIBILI_LIVE_PASSWORD}}")"'' conf/bilibili.conf
-          python ./run.py
+          sed -i '' 's/username =/username = ${{ secrets.BILIBILI_LIVE_USERNAME }}/g' conf/bilibili.conf
+          sed -i '' 's/password =/password = ${{ secrets.BILIBILI_LIVE_PASSWORD }}/g' conf/bilibili.conf
+          sed -i '' 's/access_key =/access_key = ${{ secrets.BILIBILI_LIVE_ACCESS_KEY }}/g' conf/bilibili.conf
+          sed -i '' 's/cookie =/cookie = ${{ secrets.BILIBILI_LIVE_COOKIE }}/g' conf/bilibili.conf
+          sed -i '' 's/csrf =/csrf = ${{ secrets.BILIBILI_LIVE_CSRF }}/g' conf/bilibili.conf
+          sed -i '' 's/uid =/uid = ${{ secrets.BILIBILI_LIVE_UID }}/g' conf/bilibili.conf
+          sed -i '' 's/refresh_token =/refresh_token = ${{ secrets.BILIBILI_LIVE_REFRESH_TOKEN }}/g' conf/bilibili.conf
+          python3 ./run.py

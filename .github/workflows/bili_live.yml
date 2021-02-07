@@ -10,7 +10,7 @@ on:
 
 jobs:
   bilibili_live:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
     name: bilibili_live
     env:
@@ -41,4 +41,4 @@ jobs:
           sed -i '' 's/uid =/uid = ${{ secrets.BILIBILI_LIVE_UID }}/g' conf/bilibili.conf
           echo '----check5----'
           sed -i '' 's/refresh_token =/refresh_token = ${{ secrets.BILIBILI_LIVE_REFRESH_TOKEN }}/g' conf/bilibili.conf
-          python ./run.py
+          python3 ./run.py

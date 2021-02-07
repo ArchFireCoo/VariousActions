@@ -1,7 +1,5 @@
 #docker run -itd --rm -e USER_NAME=你的B站账号 -e USER_PASSWORD=你的B站密码 dawnspace/bilibili-live-tools
 
-          # sed -i ''"$(cat conf/bilibili.conf -n | grep "username =" | awk '{print $1}')"'c '"$(echo "username = ${{ secrets.BILIBILI_LIVE_USERNAME }}")"'' conf/bilibili.conf
-          # sed -i ''"$(cat conf/bilibili.conf -n | grep "password =" | awk '{print $1}')"'c '"$(echo "password = ${{ secrets.BILIBILI_LIVE_PASSWORD}}")"'' conf/bilibili.conf
 
 name: bilibili_live
 
@@ -30,11 +28,17 @@ jobs:
           architecture: 'x64'
       - name: Run task
         run: |
-          ls -lha
           pip3 install --no-cache-dir -r requirements.txt
+          sed -i ''"$(cat conf/bilibili.conf -n | grep "username =" | awk '{print $1}')"'c '"$(echo "username = ${{ secrets.BILIBILI_LIVE_USERNAME }}")"'' conf/bilibili.conf
+          sed -i ''"$(cat conf/bilibili.conf -n | grep "password =" | awk '{print $1}')"'c '"$(echo "password = ${{ secrets.BILIBILI_LIVE_PASSWORD}}")"'' conf/bilibili.conf
+          echo '----check1----'
           sed -i ''"$(cat conf/bilibili.conf -n | grep "access_key =" | awk '{print $1}')"'c '"$(echo "access_key = ${{ secrets.BILIBILI_LIVE_ACCESS_KEY}}")"'' conf/bilibili.conf
+          echo '----check2----'
           sed -i ''"$(cat conf/bilibili.conf -n | grep "cookie =" | awk '{print $1}')"'c '"$(echo "cookie = ${{ secrets.BILIBILI_LIVE_COOKIE}}")"'' conf/bilibili.conf
+          echo '----check3----'
           sed -i ''"$(cat conf/bilibili.conf -n | grep "csrf =" | awk '{print $1}')"'c '"$(echo "csrf = ${{ secrets.BILIBILI_LIVE_CSRF}}")"'' conf/bilibili.conf
+          echo '----check4----'
           sed -i ''"$(cat conf/bilibili.conf -n | grep "uid =" | awk '{print $1}')"'c '"$(echo "uid = ${{ secrets.BILIBILI_LIVE_UID}}")"'' conf/bilibili.conf
+          echo '----check5----'
           sed -i ''"$(cat conf/bilibili.conf -n | grep "refresh_token =" | awk '{print $1}')"'c '"$(echo "refresh_token = ${{ secrets.BILIBILI_LIVE_REFRESH_TOKEN}}")"'' conf/bilibili.conf
           python ./run.py

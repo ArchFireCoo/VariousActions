@@ -1,4 +1,4 @@
-name: smzdm
+name: v2ex
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout codes
         uses: actions/checkout@v2
         with:
           repository: fashionzzZ/sign-actions
@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Run app
-        run: node smzdm.js
+        run: node v2ex.js
         env:
-          SMZDM_COOKIE: ${{ secrets.SMZDM_COOKIE }}
+          V2EXCK: ${{ secrets.V2EX_COOKIE }}
           SCKEY: ${{ secrets.SCKEY }}

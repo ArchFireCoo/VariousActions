@@ -1,16 +1,16 @@
 name: NeteaseMusic
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 16 * * *'
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           repository: Secriy/CloudMusic-LevelUp
 
@@ -26,10 +26,9 @@ jobs:
 
       - name: Run Script
         env:
-          PHONE: ${{ secrets.PHONE }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          NOMD5_PASSWORD: ${{ secrets.NOMD5_PASSWORD }}
-          PLAYLIST: ${{ secrets.PLAYLIST }}
+          PHONE: ${{ secrets.NETEASE_MUSIC_PHONE }}
+          NOMD5_PASSWORD: ${{ secrets.NETEASE_MUSIC_PASSWORD }}
+          PLAYLIST: ${{ secrets.NETEASE_MUSIC_PLAYLIST }}
           SCKEY: ${{ secrets.SCKEY }}
         run: |
           if [ ${NOMD5_PASSWORD} ];then PASSWORD=$(echo -n "${NOMD5_PASSWORD}"|md5sum|cut -d " " -f1); fi

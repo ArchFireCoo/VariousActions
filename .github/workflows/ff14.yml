@@ -8,9 +8,9 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
     steps:
-
-     
      - uses: actions/checkout@v2
      - name: 'setup python'
        uses: actions/setup-python@master

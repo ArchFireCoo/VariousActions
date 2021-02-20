@@ -12,7 +12,7 @@ jobs:
      - name: 'setup env'
        uses: actions/checkout@v2
        with:
-          repository: CheckinBox/FF14Checkin
+          repository: mengshouer/CheckinBox
           ref: master
      
      - uses: actions/checkout@v2

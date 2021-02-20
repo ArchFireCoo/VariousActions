@@ -9,9 +9,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v2
      - name: 'setup env'
-       uses: actions/setup-python@master
+       uses: actions/checkout@v2
        with:
           repository: CheckinBox/FF14Checkin
           ref: master

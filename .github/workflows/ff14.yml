@@ -23,9 +23,6 @@ jobs:
           repository: mengshouer/CheckinBox
           ref: master
         
-     - name: list
-       run: ls
-     
      - name: requirements
        run : pip3 install -r requirements.txt
 

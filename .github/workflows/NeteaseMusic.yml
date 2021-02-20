@@ -1,0 +1,36 @@
+name: NeteaseMusic
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 16 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: Secriy/CloudMusic-LevelUp
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Script
+        env:
+          PHONE: ${{ secrets.NETEASE_MUSIC_PHONE }}
+          NOMD5_PASSWORD: ${{ secrets.NETEASE_MUSIC_PASSWORD }}
+          PLAYLIST: ${{ secrets.NETEASE_MUSIC_PLAYLIST }}
+          SCKEY: ${{ secrets.SCKEY }}
+        run: |
+          if [ ${NOMD5_PASSWORD} ];then PASSWORD=$(echo -n "${NOMD5_PASSWORD}"|md5sum|cut -d " " -f1); fi
+          if [ ${PLAYLIST} ];then PLAYLIST_CMD="-l $PLAYLIST"; fi
+          python3 action.py ${PHONE} ${PASSWORD} -s ${SCKEY} ${PLAYLIST_CMD}

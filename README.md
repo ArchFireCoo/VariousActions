@@ -12,3 +12,4 @@ w2pojie|W2PJ_COOKIE|![W2pojie](https://github.com/Jasonzj/VariousActions/workflo
 |什么值得买签到|SMZDM_COOKIE|![smzdm](https://github.com/Jasonzj/VariousActions/workflows/smzdm/badge.svg)|
 |V2EX签到|V2EX_COOKIE|![v2ex](https://github.com/Jasonzj/VariousActions/workflows/v2ex/badge.svg)|
 |网易云音乐签到刷歌|NETEASE_MUSIC_PHONE<br>NETEASE_MUSIC_PASSWORD<br>NETEASE_MUSIC_PLAYLIST|![NeteaseMusic](https://github.com/Jasonzj/VariousActions/workflows/NeteaseMusic/badge.svg)|
+|FF14积分签到|FFLOGIN_NAME<br>FFLOGIN_PASSWORD<br>AREA_NAME<br>SERVER_NAME<br>ROLE_NAME|[![ff14](https://github.com/VidocqH/VariousActions/actions/workflows/ff14.yml/badge.svg)](https://github.com/VidocqH/VariousActions/actions/workflows/ff14.yml)

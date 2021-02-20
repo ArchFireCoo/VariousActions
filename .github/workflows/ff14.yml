@@ -1,0 +1,28 @@
+name: 'ff14'
+
+on:
+  schedule:
+    - cron: '30 16 * * *'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v2
+     - name: 'setup env'
+       uses: actions/setup-python@master
+       with:
+          repository: CheckinBox/FF14Checkin
+          ref: master
+     
+     - name: requirements
+       run : pip3 install -r requirements.txt
+       
+     - name: main
+       env:
+         SCKEY: ${{ secrets.SCKEY }}
+         fflogin_name: ${{ secrets.fflogin_name }}
+         fflogin_password: ${{ secrets.fflogin_password }}
+       run: |
+         python3 ./FF14Checkin/FF14CheckinForSCF.py

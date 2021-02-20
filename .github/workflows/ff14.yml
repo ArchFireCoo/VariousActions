@@ -14,7 +14,6 @@ jobs:
        with:
           repository: CheckinBox/FF14Checkin
           ref: master
-    
      - uses: actions/checkout@v2
      - name: 'setup python'
        uses: actions/setup-python@master

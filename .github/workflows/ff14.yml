@@ -9,17 +9,19 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-     - name: 'setup env'
-       uses: actions/checkout@v2
-       with:
-          repository: mengshouer/CheckinBox
-          ref: master
+
      
      - uses: actions/checkout@v2
      - name: 'setup python'
        uses: actions/setup-python@master
        with:
         python-version: 3.7
+        
+     - name: 'setup env'
+       uses: actions/checkout@v2
+       with:
+          repository: mengshouer/CheckinBox
+          ref: master
         
      - name: list
        run: ls

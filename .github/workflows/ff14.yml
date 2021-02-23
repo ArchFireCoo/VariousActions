@@ -7,32 +7,39 @@ on:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       TZ: Asia/Shanghai
     steps:
-     - uses: actions/checkout@v2
-     - name: 'setup python'
-       uses: actions/setup-python@master
-       with:
-        python-version: 3.7
-        
-     - name: 'setup env'
-       uses: actions/checkout@v2
-       with:
-          repository: mengshouer/CheckinBox
-          ref: master
-        
-     - name: requirements
-       run : pip3 install -r requirements.txt
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: vidocqh/VariousActions
+          ref: main
 
-     - name: main
-       env:
-         SCKEY: ${{ secrets.SCKEY }}
-         fflogin_name: ${{ secrets.fflogin_name }}
-         fflogin_password: ${{ secrets.fflogin_password }}
-         area_name: ${{ secrets.area_name }}
-         server_name: ${{ secrets.server_name }}
-         role_name: ${{ secrets.role_name }}
-       run: |
-         python3 ./FF14Checkin/FF14CheckinForSCF.py
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: main
+        env:
+          SCKEY: ${{ secrets.SCKEY }}
+          USERNAME: ${{ secrets.fflogin_name }}
+          PASSWORD: ${{ secrets.fflogin_password }}
+          AREA: ${{ secrets.area_name }}
+          SERVER: ${{ secrets.server_name }}
+          ROLE: ${{ secrets.role_name }}
+        run: |
+          node ./scripts/ff14.js

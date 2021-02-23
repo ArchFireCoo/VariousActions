@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          repository: VidocqH/ff14_checkin
+          ref: master
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -39,4 +42,4 @@ jobs:
           SERVER: ${{ secrets.server_name }}
           ROLE: ${{ secrets.role_name }}
         run: |
-          node ./scripts/ff14.js
+          node ./index.js

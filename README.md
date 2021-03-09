@@ -1,5 +1,11 @@
 # VariousActions
 
+## 使用方法
+
+1. `Fork`本仓库
+2. 在你的仓库内，点击`Settings`-`Secrets`
+3. 按需填写Secret，`SCKEY`为[Server酱](http://sc.ftqq.com/3.version)推送key
+
 ## Secrets Table and Actions Status
 
 Actions | Secrets|Status

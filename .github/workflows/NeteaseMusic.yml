@@ -33,4 +33,5 @@ jobs:
         run: |
           if [ ${NOMD5_PASSWORD} ];then PASSWORD=$(echo -n "${NOMD5_PASSWORD}"|md5sum|cut -d " " -f1); fi
           if [ ${PLAYLIST} ];then PLAYLIST_CMD="-l $PLAYLIST"; fi
-          python3 action.py ${PHONE} ${PASSWORD} -s ${SCKEY} ${PLAYLIST_CMD}
+          if [ ${PHONE} ];then python3 action.py ${PHONE} ${PASSWORD} -s ${SCKEY} ${PLAYLIST_CMD}; fi
+
